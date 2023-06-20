@@ -23,5 +23,15 @@ class Laser_driver:
         return self._connection.root.controllers[controller].get(f'{laser}emission')
 
 
-  
+    # returns the voltage offset of the chose laser
+    def get_voltage_offset(self, controller, laser_number):
+        assert(laser_number in (1, 2))
+        return self._connection.root.controllers[controller].get(f'laser{laser_number}.scan.offset')
+
+
+    # Sets a laser to a chosen laser offset
+    def set_voltage_offset(self, controller, laser_number, voltage_offset):
+        assert(laser_number in (1, 2))
+        return self._connection.root.controllers[controller].set(f'laser{laser_number}.scan.offset', voltage_offset)
+    
 
