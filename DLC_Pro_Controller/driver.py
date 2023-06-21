@@ -7,7 +7,12 @@ class Laser:
 
     # establishes connection
     def __init__(self, name, controller, port_=9000):
-        self._controller = connect(name, port=port_).root.controllers[controller]
+        try:
+            self._network_Connection = connect(name, port=port_)
+        except:
+            print("Network connection Failure")
+            return
+        self._controller = self._network_Connection.root.controllers[controller]
         self._controller_name = controller
 
     # returns the emission status of the chose laser
